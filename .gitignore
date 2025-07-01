@@ -1,0 +1,33 @@
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Byte-compiled / optimized / DLL files
+backend/__pycache__/
+*.pyc
+*.pyo
+
+# Distribution / packaging
+dist/
+build/
+*.egg
+*.egg-info/
+
+# Logs
+*.log
+
+# Database files (if using SQLite)
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+
+# IDE specific files (e.g., VS Code)
+.vscode/
+
+# Test/coverage reports
+.pytest_cache/
+.coverage
+htmlcov/

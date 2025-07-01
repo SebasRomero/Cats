@@ -126,8 +126,8 @@ Styling is not required — focus on working functionality.
 
 ## ✅ Project Checklist
 
-- [ ] `import_cat_facts.py` fetches and stores 5 unique facts
-- [ ] SQLite DB and schema created programmatically
+- [x] `import_cat_facts.py` fetches and stores 5 unique facts
+- [x] SQLite DB and schema created programmatically
 - [ ] FastAPI backend with all three endpoints
 - [ ] CORS enabled on the backend
 - [ ] React frontend fetches and displays data
