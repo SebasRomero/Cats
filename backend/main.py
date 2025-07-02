@@ -1,13 +1,13 @@
-from fastapi import FastAPI, APIRouter, status
+from fastapi import FastAPI, APIRouter, status, Query
 from dto import fact_dto
 import uvicorn
-from db import getFacts, getRandomFact, insertFact
+from db import getRandomFact, insertFact, getFactsPaginated
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can limit this to http://localhost:3000 if preferred
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -18,9 +18,9 @@ router = APIRouter()
 def hello():
     return {"status":"ok"}
 
-@router.get("/catfacts/", status_code=status.HTTP_200_OK, response_description="All facts!")
-async def getAllFacts():
-    return getFacts()
+@router.get("/catfacts/")
+def list_facts(page: int = Query(1, ge=1), size: int = Query(10, ge=1, le=100)):
+    return getFactsPaginated(page, size)
 
 @router.get("/catfacts/random/", status_code=status.HTTP_200_OK, response_description="A random fact!")
 async def getAFact():
