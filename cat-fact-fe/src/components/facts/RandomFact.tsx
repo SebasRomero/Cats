@@ -5,7 +5,6 @@ import type { Fact } from "../../types/facts";
 
 const RandomFact = () => {
   const [fact, setFact] = useState<Fact | null>(null);
-  console.log(fact);
   useEffect(() => {
     getRandomFact()
       .then((res: any) => {
