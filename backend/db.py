@@ -1,5 +1,6 @@
 import sqlite3
 from import_cat_facts import cur, con
+from fastapi import HTTPException, status
 
 getFactsQuery = "SELECT * FROM cat_facts"
 getRandomFactQuery = "SELECT * FROM cat_facts ORDER BY RANDOM() LIMIT 1"
@@ -35,8 +36,10 @@ def insertFact(fact: str):
     try:
         cur.execute(insertFactQuery, (fact,))
         con.commit()
-        return {
-            "Fact": getFactByName(fact)
-        }
+        if (cur.rowcount == 1):
+            return {
+                "Fact": getFactByName(fact)
+            }
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={"message": "Fact already exist", "statusCode": status.HTTP_400_BAD_REQUEST})
     except sqlite3.Error as e:
         print(e)
