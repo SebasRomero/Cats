@@ -11,8 +11,12 @@ const NavBar = () => {
                 <NavBarLink name="Facts" route="/facts"/>
             </li>
             <li>
+                <NavBarLink name="Random Fact" route="/random-fact"/>
+            </li>
+            <li>
                 <NavBarLink name="Create Fact" route="/create-fact"/>
             </li>
+            
         </ul>
     </header>
   )
