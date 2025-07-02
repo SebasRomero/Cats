@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getFacts } from "../hooks/getFacts";
-import type { Fact } from "../types/facts";
+import { getFacts } from "../../hooks/getFacts";
+import type { Fact } from "../../types/facts";
 import FactCard from "./FactCard";
 
 const Facts = () => {
