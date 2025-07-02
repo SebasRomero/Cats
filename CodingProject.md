@@ -128,9 +128,9 @@ Styling is not required — focus on working functionality.
 
 - [x] `import_cat_facts.py` fetches and stores 5 unique facts
 - [x] SQLite DB and schema created programmatically
-- [ ] FastAPI backend with all three endpoints
-- [ ] CORS enabled on the backend
-- [ ] React frontend fetches and displays data
-- [ ] React form can submit a new fact
+- [x] FastAPI backend with all three endpoints
+- [x] CORS enabled on the backend
+- [x] React frontend fetches and displays data
+- [x] React form can submit a new fact
 
 ---
