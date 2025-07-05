@@ -52,6 +52,8 @@ def getFactByName(fact: str):
 def insertFact(fact: str):
     con = sqlite3.connect(catFactsDB)
     cur = con.cursor()
+    if not (fact.strip()):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={"message": "Fact can not be empty", "statusCode": status.HTTP_400_BAD_REQUEST})
     try:
         cur.execute(insertFactQuery, (fact,))
         con.commit()
