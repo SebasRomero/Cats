@@ -17,6 +17,7 @@ const CreateFact = () => {
           <input
             type="text"
             name="fact"
+            required
             className="my-4 bg-white p-2 outline-orange-300"
             placeholder="A cat fact..."
           />

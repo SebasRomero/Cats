@@ -13,14 +13,16 @@ export async function addFact(
       headers: { "Content-Type": "application/json; charset=utf-8" },
       body: JSON.stringify({ fact: fact }),
     });
+
+    let data = await response.json();
     if (response.status != 201) {
-      setError("That fact already exist");
+      setError(data.detail.message);
       setMessage(null)
       return;
     }
     setError(null);
     setMessage("Fact added succesfully!")
-    return await response.json();
+    return data;
   } catch (error) {
     console.log(error);
   }
