@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter, status, Query
 from dto import fact_dto
 import uvicorn
-from db import getRandomFact, insertFact, getFactsPaginated
+from db import getRandomFact, insertFact, getFactsPaginated, deleteFact, updateFact
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -28,7 +28,16 @@ async def getAFact():
 
 @router.post("/catfacts/", status_code=status.HTTP_201_CREATED, response_description="Fact created!")
 async def createFact(fact: fact_dto.FactDTO):
-    return insertFact(fact=fact.fact)
+    return insertFact(fact.fact)
+
+@router.delete("/catfacts/", status_code=status.HTTP_200_OK, response_description="Fact deleted!")
+async def delete(id: str = Query()):
+    return deleteFact(id)
+
+@router.put("/catfacts/", status_code=status.HTTP_200_OK, response_description="Fact updated!")
+async def update(fact: fact_dto.FactDTO, id: str = Query()):
+    return updateFact(id, fact.fact)
+
 
 app.include_router(router)
 if __name__ == "__main__":

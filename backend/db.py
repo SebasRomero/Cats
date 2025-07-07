@@ -6,6 +6,8 @@ getFactsQuery = f"SELECT * FROM {catFactsName} LIMIT ? OFFSET ?"
 getRandomFactQuery = f"SELECT * FROM {catFactsName} ORDER BY RANDOM() LIMIT 1"
 insertFactQuery = f"INSERT OR IGNORE INTO {catFactsName} (fact) VALUES (?)"
 getFactByNameQuery = f"SELECT * FROM {catFactsName} WHERE fact = ?"
+deleteFactByIdQuery =f"DELETE FROM {catFactsName} WHERE id = ?"
+updateFactByIdQuery = f"UPDATE {catFactsName} SET fact = ? WHERE id = ?"
 
 def getFactsPaginated(page: int = 1, size: int = 10):
     offset = (page - 1) * size
@@ -62,5 +64,29 @@ def insertFact(fact: str):
                 "Fact": getFactByName(fact)
             }
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={"message": "Fact already exist", "statusCode": status.HTTP_400_BAD_REQUEST})
+    except sqlite3.Error as e:
+        print(e)
+
+def deleteFact(id: str):
+    con = sqlite3.connect(catFactsDB)
+    cur = con.cursor()
+    try:
+        cur.execute(deleteFactByIdQuery, (id,))
+        con.commit()
+        if (cur.rowcount == 1):
+            return True
+    except sqlite3.Error as e:
+        print(e)
+
+def updateFact(id: str, name: str):
+    con = sqlite3.connect(catFactsDB)
+    cur = con.cursor()
+    try:
+        a = getFactByName(name)
+        if(a): raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={"message": "Fact already exist", "statusCode": status.HTTP_400_BAD_REQUEST})
+        cur.execute(updateFactByIdQuery, (name, id,))
+        con.commit()
+        if (cur.rowcount == 1):
+            return True
     except sqlite3.Error as e:
         print(e)
