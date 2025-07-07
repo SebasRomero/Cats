@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router";
 import { getPages } from "../pagination/getPages";
 
 const Facts = () => {
-  const [facts, setFacts] = useState([]);
+  const [facts, setFacts] = useState<Fact[]>([]);
   const [pages, setPages] = useState<(number | string)[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +30,7 @@ const Facts = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {facts.map((fact: Fact) => (
-            <FactCard key={fact.id} fact={fact.fact} />
+            <FactCard key={fact.id} name={fact.fact} id={fact.id} setFacts={setFacts} />
           ))}
         </div>
       )}
